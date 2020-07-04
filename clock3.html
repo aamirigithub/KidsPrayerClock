@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta http-equiv="refresh" content="60">
+        <link rel="stylesheet" href="./clockStyle.css">
+        <link rel="stylesheet" href="sliderStyle.css">
+        <script src="./clockfunction.js"></script>
+        <script src="sliderfunction.js"></script>
+        <script src="hijri_calander.js"></script>
+        <script src="PrayerTimes.js"></script>
+
+         
+</head>
+<style>
+        td, th {font-family: verdana; font-size: 28px; color:white;}
+        #timetable {border-width: 2px; border-style: outset; border-collapse: collapse; border-color:white; width: 60em;}
+        #timetable td, #timetable th {font-weight: bold; border-width: 2px; border-spacing: 1px; padding: 2px 6px; border-style: inset; border-color: #CCCCCC;}
+        #timetable th {color:white; text-align: center; font-weight: bold; background-color: #F8F7F4;}
+        @font-face {
+            font-family: 'digital-7';
+            src: url('digital-7.ttf');
+            }
+        .newfont {
+            font-family: 'digital-7';
+            }
+    </style>
+
+<body class="clock_body" onload="digitalClock(); showSlides();">
+
+    <div class="topnav clock_menu">
+        <div class="date_span" style="color:azure"> 
+            <script>
+                document.write(writeIslamicDate());
+            </script>
+                
+        </div>
+    </div>
+
+    <div class="date_span" id="todayDate"></div>
+
+    <div class="slideshow-container">
+
+            <div class="mySlides">
+                <!--<div class="numbertext">1 / 4</div>-->
+                <div class="time_span newfont" style="color: blue;" id="todayTime"></div>
+            </div>
+
+            <div class="mySlides">
+               <!--<div class="numbertext">2 / 4</div>--> 
+                <div class="time_span newfont" style="color:yellow" id="todayTime2"></div>
+            </div>
+
+            <div class="mySlides">
+                   <!--<div class="numbertext">3 / 4</div>--> 
+                    <div class="time_span newfont" style="color:crimson" id="todayTime3"></div>
+            </div>
+        </div>
+        <br/>
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    
+    <br/>
+    <div><p id="table"></p>
+            <script type="text/javascript">
+	
+                var date = new Date(); // today
+                prayTimes.setMethod('ISNA'); 
+                prayTimes.adjust( {asr: 'Hanafi'} );
+                // latitude 43, longitude -80, and time zone getTimes (date, coordinates, timezone, dst, format)
+                var times = prayTimes.getTimes(date, [39.1141, -94.5893, 10], -6);
+                
+                var list = ['Imsak', 'Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight'];
+            
+                var html = '<table id="timetable" style="margin-left:auto; margin-right:auto; background-color:#00FF00">';
+                html += '<tr><th colspan="2" style="color:black">PRAYER TIME</th></tr>';
+                for(var i in list)	{
+                    html += '<><td>'+ list[i]+ '</td>';
+                    html += '<td>'+ times[list[i].toLowerCase()]+ '</td></tr>';
+                    
+                }
+                html += '</table>';
+                
+                document.getElementById('table').innerHTML = html;
+            
+            </script>
+    </div>
+
+    
+</html>
